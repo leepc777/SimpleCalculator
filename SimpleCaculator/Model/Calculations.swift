@@ -36,8 +36,15 @@ struct Calculations {
             return perform2NumCalculation(n2: n)
             
         default:
+            // if there is undone calculation stored in tuple already, +-*/ will do the calculation and update the tuple.
+            if let intermida = intermediateCalculation {
+                return performContinuingCalculation(n2: n)
+            }
+            else {
+            // if there is no undone calculation in tuple, +-*/ will just update the tuple without caculation until users tapping = 
             intermediateCalculation = (n1: n, calMethod: symbol)
-//            return perform2NumCalculation(n2: n)
+            }
+//            return performContinuingCalculation(n2: n)
         }
         
         return nil
@@ -68,5 +75,49 @@ struct Calculations {
 //        intermediateCalculation!.n1 = 0
         return nil
     }
+    
+    
+    
+    private mutating func performContinuingCalculation(n2: Double) -> Double? {
+        
+        if let n1 = intermediateCalculation?.n1,let operation = intermediateCalculation?.calMethod {
+            
+            switch operation {
+            case "+" :
+                defer{
+//                    print("defer got called intermediateCalculation!.n1=\(intermediateCalculation!.n1) ,\(n1) ,\(n2)")
+                intermediateCalculation!.n1 = n1+n2
+                intermediateCalculation!.calMethod = "+"
+                //                defer {intermediateCalculation!.n1 = n1+n2}
+                }
+                return n1 + n2
+            case "−" :
+                defer {
+                intermediateCalculation!.n1 = n1-n2
+                intermediateCalculation!.calMethod = "−"
+                }
+                return n1 - n2
+            case "×" :
+                defer {
+                intermediateCalculation!.n1 = n1*n2
+                    intermediateCalculation!.calMethod = "×"
+                    
+                }
+                return n1 * n2
+            case "÷" :
+                defer {
+                intermediateCalculation!.n1 = n1/n2
+                intermediateCalculation!.calMethod = "÷"
+                }
+                return n1 / n2
+            default:
+                fatalError("The operation passed in is not + - * /")
+            }
+        }
+        //        intermediateCalculation!.n1 = 0
+        return nil
+    }
+
+    
     
 }
