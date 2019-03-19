@@ -23,6 +23,9 @@ class ViewController: UIViewController {
             }
             return value
         }
+        set {
+            displayLabel.text = String(newValue)
+        }
     }
     
     var displayNumber : String = ""
@@ -40,11 +43,12 @@ class ViewController: UIViewController {
 //        if let calMethod = sender.currentTitle
         switch calMethod {
         case "+/-":
-            displayLabel.text = "\(displayValue * -1)"
+            displayValue *= -1
         case "AC":
-            displayLabel.text = "0"
+//            displayLabel.text = "0"
+            displayValue = 0
         case "%":
-            displayLabel.text = "\(displayValue * 0.01)"
+            displayValue *= 0.01
         default:
             ()
         }
