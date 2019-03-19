@@ -33,6 +33,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayLabel: UILabel!
     
     
+    // must use var in order to pass number to instance property number in struct
+    private var calculator = Calculations()
+
     @IBAction func calcButtonTapped(_ sender: UIButton) {
         isFinishedTypingNumber = true
         
@@ -40,18 +43,29 @@ class ViewController: UIViewController {
             fatalError(" calButtom.currentTitle as nil")
         }
         
-//        if let calMethod = sender.currentTitle
-        switch calMethod {
-        case "+/-":
-            displayValue *= -1
-        case "AC":
-//            displayLabel.text = "0"
-            displayValue = 0
-        case "%":
-            displayValue *= 0.01
-        default:
-            ()
+//        let calculator = Calculations(number: displayValue)
+        calculator.setNumber(displayValue)
+        
+        
+        // can't use guard beacuse the result could be nil if users tap calc symbol without number first. So use if let instead
+//        guard let result = calculator.calculate(symbol: calMethod) else {
+//            fatalError("The result of calculation is nil")
+//        }
+        
+        if let result = calculator.calculate(symbol: calMethod) {
+        displayValue = result
         }
+//        switch calMethod {
+//        case "+/-":
+//            displayValue *= -1
+//        case "AC":
+////            displayLabel.text = "0"
+//            displayValue = 0
+//        case "%":
+//            displayValue *= 0.01
+//        default:
+//            ()
+//        }
         
     }
     
