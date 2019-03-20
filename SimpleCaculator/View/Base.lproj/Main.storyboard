@@ -25,18 +25,30 @@
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="100.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bY-dm-nZL">
-                                                <rect key="frame" x="10" y="10" width="315" height="80.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <rect key="frame" x="10" y="10" width="321" height="74.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-Q7-dJu" userLabel="Operator Label">
+                                                <rect key="frame" x="283" y="78.5" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="ZIC-Iv-2gB"/>
+                                                    <constraint firstAttribute="width" constant="42" id="uX7-7A-N9q"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="3bY-dm-nZL" secondAttribute="trailing" constant="10" id="6H1-jb-mfb"/>
+                                            <constraint firstAttribute="trailing" secondItem="VbG-Q7-dJu" secondAttribute="trailing" constant="10" id="4la-9H-dmn"/>
+                                            <constraint firstAttribute="trailing" secondItem="3bY-dm-nZL" secondAttribute="trailing" constant="4" id="6H1-jb-mfb"/>
                                             <constraint firstItem="3bY-dm-nZL" firstAttribute="leading" secondItem="mtE-rX-bjb" secondAttribute="leading" constant="10" id="E96-0v-0C7"/>
                                             <constraint firstItem="3bY-dm-nZL" firstAttribute="top" secondItem="mtE-rX-bjb" secondAttribute="top" constant="10" id="GkS-3A-27F"/>
-                                            <constraint firstAttribute="bottom" secondItem="3bY-dm-nZL" secondAttribute="bottom" constant="10" id="c18-Uv-d9f"/>
+                                            <constraint firstAttribute="bottom" secondItem="VbG-Q7-dJu" secondAttribute="bottom" constant="1" id="MRT-IP-8u1"/>
+                                            <constraint firstAttribute="bottom" secondItem="3bY-dm-nZL" secondAttribute="bottom" constant="16" id="c18-Uv-d9f"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="emy-GU-DaF">
@@ -292,6 +304,14 @@
                     </view>
                     <connections>
                         <outlet property="displayLabel" destination="3bY-dm-nZL" id="KHj-AS-zPj"/>
+                        <outlet property="equalSign" destination="d0k-No-Dm0" id="pcg-QF-IKT"/>
+                        <outlet property="negativeSign" destination="LYU-kf-97e" id="ZR8-6Q-sj2"/>
+                        <outlet property="operatorLabel" destination="VbG-Q7-dJu" id="xNn-9V-SLz"/>
+                        <outlet property="persentSign" destination="I0v-kH-gF0" id="y7w-Pm-Bhr"/>
+                        <outletCollection property="fourCalculations" destination="rk9-pj-RUh" collectionClass="NSMutableArray" id="TYp-Xu-L6K"/>
+                        <outletCollection property="fourCalculations" destination="dhR-xj-4gL" collectionClass="NSMutableArray" id="tTP-wC-b5n"/>
+                        <outletCollection property="fourCalculations" destination="tRA-Bj-gVh" collectionClass="NSMutableArray" id="KcD-L1-A8L"/>
+                        <outletCollection property="fourCalculations" destination="fIr-6b-uDp" collectionClass="NSMutableArray" id="HyU-Ba-Fhd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

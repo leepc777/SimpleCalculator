@@ -29,19 +29,36 @@ class ViewController: UIViewController {
     }
     
     var displayNumber : String = ""
+    var isLastKeyInANumber : Bool = false
 
     @IBOutlet weak var displayLabel: UILabel!
+    
+    @IBOutlet weak var operatorLabel: UILabel!
+    
+    
+    @IBOutlet var fourCalculations: [UIButton]!
+    @IBOutlet weak var negativeSign: UIButton!
+    @IBOutlet weak var persentSign: UIButton!
+    @IBOutlet weak var equalSign: UIButton!
     
     
     // must use var in order to pass number to instance property number in struct
     private var calculator = Calculations()
 
     @IBAction func calcButtonTapped(_ sender: UIButton) {
-        isFinishedTypingNumber = true
+//        isFinishedTypingNumber = true
+//        isLastKeyInANumber = false
         
         guard let calMethod = sender.currentTitle else {
             fatalError(" calButtom.currentTitle as nil")
         }
+        
+//        enableCalButtons(false)
+//        negativeSign.isUserInteractionEnabled = false
+//        persentSign.isUserInteractionEnabled = false
+//        equalSign.isUserInteractionEnabled = false
+        
+        operatorLabel.text = calMethod
         
 //        let calculator = Calculations(number: displayValue)
         calculator.setNumber(displayValue)
@@ -52,21 +69,14 @@ class ViewController: UIViewController {
 //            fatalError("The result of calculation is nil")
 //        }
         
-        if let result = calculator.calculate(symbol: calMethod) {
-        displayValue = result
-        }
-//        switch calMethod {
-//        case "+/-":
-//            displayValue *= -1
-//        case "AC":
-////            displayLabel.text = "0"
-//            displayValue = 0
-//        case "%":
-//            displayValue *= 0.01
-//        default:
-//            ()
-//        }
         
+        if let result = calculator.calculate(symbol: calMethod,isLastKeyInANumber:isLastKeyInANumber) {
+        displayValue = result
+            print(" <<< mutating func calculate(symbol:) return the result : \(result)")
+        }
+        
+        isFinishedTypingNumber = true
+        isLastKeyInANumber = false
     }
     
     @IBAction func numButtonTapped(_ sender: UIButton) {
@@ -75,6 +85,13 @@ class ViewController: UIViewController {
             print(" number button doesn't have text")
             return
         }
+
+//        enableCalButtons(true)
+//        negativeSign.isUserInteractionEnabled = true
+//        persentSign.isUserInteractionEnabled = true
+//        equalSign.isUserInteractionEnabled = true
+
+        operatorLabel.text = ""
         
         // when finishing typing number by tapping calc buttons,show the next number to label.
         if isFinishedTypingNumber {
@@ -98,12 +115,45 @@ class ViewController: UIViewController {
             displayLabel.text = displayLabel.text! + number
         }
         
-        
+        isLastKeyInANumber = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+//        for button in fourCalculations {
+//            button.isEnabled = false
+//            button.isUserInteractionEnabled = false
+//            //            button.isHidden = false
+////            button.isHighlighted = false
+//        }
+
+    }
+    
+    
+    func enableCalButtons(_ yes:Bool) {
+        
+        if yes {
+            for button in fourCalculations {
+//                button.isEnabled = true
+                button.isUserInteractionEnabled = true
+//                button.isOpaque = false
+                //            button.isHidden = true
+                //            button.isHighlighted = false
+            }
+        } else {
+            
+            for button in fourCalculations {
+//                button.isEnabled = false
+                button.isUserInteractionEnabled = false
+//                button.isOpaque = true
+                //            button.isHidden = true
+                //            button.isHighlighted = false
+            }
+
+        }
+        
     }
 
 
