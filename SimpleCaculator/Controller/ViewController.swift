@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     // a tracker to keep trakcing typing number has been done
     // when typing is down, display the new single bit number
     // when typing is still going, cancaternate the single bit number to previous number.
+    
     private var isFinishedTypingNumber: Bool = true
     
     private var displayValue: Double {
@@ -28,7 +29,11 @@ class ViewController: UIViewController {
         }
     }
     
-    var displayNumber : String = ""
+            var preValueString0 : String?
+            var preSymbol : String?
+
+    
+//    var displayNumber : String = ""
     var isLastKeyInANumber : Bool = false
 
     @IBOutlet weak var displayLabel: UILabel!
@@ -60,6 +65,15 @@ class ViewController: UIViewController {
         
         operatorLabel.text = calMethod
         
+        if let valueString = preValueString0 , let symbol = preSymbol
+        {
+            
+        }
+        
+        
+//        operatorLabel.text = "\(preValueString0) \(preSymbol)"
+//        operatorLabel.text = "\(displayValue) " + calMethod
+        print("tapped clcButtonTappeds",displayValue,calMethod)
 //        let calculator = Calculations(number: displayValue)
         calculator.setNumber(displayValue)
         
@@ -75,43 +89,70 @@ class ViewController: UIViewController {
             print(" <<< mutating func calculate(symbol:) return the result : \(result)")
         }
         
+        // for trakcing previous number and operator
+        preSymbol = sender.currentTitle
+        if sender.currentTitle == "AC" {
+            preValueString0 = nil
+            preSymbol = nil
+        }
+        if isLastKeyInANumber {
+            preValueString0 = displayLabel.text
+        }
+        
         isFinishedTypingNumber = true
         isLastKeyInANumber = false
     }
     
     @IBAction func numButtonTapped(_ sender: UIButton) {
+//        var preValueString0 : String?
+//        var preSymbol : String?
+        
+        operatorLabel.text = ""
 
         guard let number = sender.currentTitle else {
             print(" number button doesn't have text")
             return
         }
+        print("  *** tapped numberButtons. preValueString0:\(preValueString0) preSymbol:\(preSymbol)")
+        if let value = preValueString0,let symbol = preSymbol {
+            print("   *** preValueString0:\(value)  preSymbol\(symbol) are not nil")
+            operatorLabel.text = "\(value) \(symbol) \t \t"
+//            operatorLabel.text = "  got hit !!!"
 
+        }
 //        enableCalButtons(true)
 //        negativeSign.isUserInteractionEnabled = true
 //        persentSign.isUserInteractionEnabled = true
 //        equalSign.isUserInteractionEnabled = true
 
-        operatorLabel.text = ""
+//        operatorLabel.text = ""
         
         // when finishing typing number by tapping calc buttons,show the next number to label.
         if isFinishedTypingNumber {
+//            preValueString0 = displayLabel?.text
+            preSymbol = operatorLabel?.text
+            
             displayLabel.text = number
             isFinishedTypingNumber = false
         } else {
             // still typing the new number.
             
-            // use floor to round double(remove decimal point).
-            // the ideal is you can only add . to Int. But this is too complicated. No good
-//            if number == "." {
-//                let isInt = ( floor(displayValue) == displayValue )
-//                if !isInt {return}
-//            }
+/*
+             //use floor to round double(remove decimal point).
+             //the ideal is you can only add . to Int. But this is too complicated. No good
+            if number == "." {
+                let isInt = ( floor(displayValue) == displayValue )
+                if !isInt {return}
+            }
+*/
             
+            // to prevent number has multiple .
             if number == "." {
 //            guard !displayLabel.text!.contains(".") else {return}
                 if displayLabel.text!.contains(".") {return}
             }
             
+            // if Not finishing Typing Number yet, and not mulitiple . , then cancatenate new number
             displayLabel.text = displayLabel.text! + number
         }
         
@@ -155,7 +196,6 @@ class ViewController: UIViewController {
         }
         
     }
-
 
 }
 
