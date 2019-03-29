@@ -116,8 +116,15 @@ class ViewController: UIViewController {
         print("  *** tapped numberButtons. preValueString0:\(preValueString0) preSymbol:\(preSymbol)")
         if let value = preValueString0,let symbol = preSymbol {
             print("   *** preValueString0:\(value)  preSymbol\(symbol) are not nil")
-            operatorLabel.text = "\(value) \(symbol) \t \t"
-//            operatorLabel.text = "  got hit !!!"
+//            operatorLabel.text = "\(value) \(symbol) \t \t"
+            
+            // clear operatorLabel if tap a number after = 
+            if symbol == "=" {
+                operatorLabel.text = " "
+            }
+            else {
+                operatorLabel.text = "\(value) \(symbol) \t \t"
+            }
 
         }
 //        enableCalButtons(true)
